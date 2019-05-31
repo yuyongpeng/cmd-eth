@@ -6,11 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "eth": ".bin/index.js",
+    "eth_init_config": ".bin/initconfig.js"
+  },
   "author": "yuyongpeng",
   "license": "MIT",
   "dependencies": {
     "commander": "^2.20.0",
-    "web3": "^1.0.0-beta.55"
+    "toml": "^3.0.0",
+    "web3": "^1.0.0-beta.55",
+    "yaml": "^1.6.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
