@@ -11,6 +11,10 @@ async function parseToml(file){
     configFile = file || defaultConfigFile;
     var fileContent = fs.readFileSync(configFile)
     var config = await toml.parse(fileContent)
+    // 把配置文件的信息放到全局变量中
+    for(let key in config){
+        global[key] = config[key]
+    }
     return config
 }
 

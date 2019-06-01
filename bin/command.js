@@ -10,7 +10,7 @@ async function info(configFile){
     // console.log(config.defaultConfigFile)
     var cfg = await config.parse(null)
 
-    ether.getEthInfo(cfg).then(data => {
+    ether.getEthInfo().then(data => {
         var info = data
         console.log(info)
     })

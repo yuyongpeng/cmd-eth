@@ -7,8 +7,8 @@ var Web3 = require('web3')
 /**
  * 获得web3对象
  */
-function getWeb3(config){
-    var web3 = new Web3(new Web3.providers.HttpProvider(config.schame+"://"+config.ip+":"+config.port), null, {});
+function getWeb3(){
+    var web3 = new Web3(new Web3.providers.HttpProvider(global.schema+"://"+global.ip+":"+global.port), null, {});
     return web3
 }
 
@@ -17,8 +17,8 @@ function getWeb3(config){
  * @param config 配置信息
  * @returns {Promise.<*>}
  */
-async function getEthInfo(config){
-    web3 = getWeb3(config)
+async function getEthInfo(){
+    web3 = getWeb3()
     lastBlockNumber = await web3.eth.getBlockNumber()
     return lastBlockNumber
 }
