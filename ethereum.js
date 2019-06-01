@@ -2,23 +2,23 @@
  * Created by yuyongpeng on 2019/5/31.
  */
 
-var config = require('./config')
 var Web3 = require('web3')
 
 /**
  * 获得web3对象
  */
-function getWeb3(){
+function getWeb3(config){
     var web3 = new Web3(new Web3.providers.HttpProvider(config.schame+"://"+config.ip+":"+config.port), null, {});
     return web3
 }
 
 /**
  * 获得以太坊的的信息
+ * @param config 配置信息
  * @returns {Promise.<*>}
  */
-async function getEthInfo(){
-    web3 = getWeb3()
+async function getEthInfo(config){
+    web3 = getWeb3(config)
     lastBlockNumber = await web3.eth.getBlockNumber()
     return lastBlockNumber
 }

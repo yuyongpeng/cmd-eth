@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /**
  * Created by yuyongpeng on 2019/5/31.
  */
@@ -5,23 +6,26 @@ var program = require('commander');
 var ether = require('../ethereum')
 var toml = require('toml')
 var fs = require('fs')
+var configs = require('../config')
+var command = require('./command')
+
+var configFile = '';
 
 async function main(){
     program
         .version('0.0.1')
-        .option('-f, --config <path>', '配置文件(default: /etc/eth.cfg)');
+        .option('-f, --config <path>', '配置文件(default: /etc/eth.conf)','./eth.conf');
+
+    program.on('option:config', function(){
+        configFile = this.config || './test.toml';
+        console.log(`file: ${configFile}`)
+    });
 
     program
         .command('info')
         .description('获得以太坊的一些基本信息进行列表显示')
         .action(function(options){
-            ether.getEthInfo().then(data => {
-                var info = data
-                console.log(info)
-
-                configFile = program.config;
-                console.log(configFile);
-            })
+            command.info(program.config);
         });
 
     program
@@ -45,13 +49,15 @@ async function main(){
             console.log('deploying "%s"', env);
         });
 
+
+
     program.parse(process.argv);
 
-    configFile = program.config;
+    configFile = program.config || './test.toml';
     console.log(configFile);
     var fileContent = fs.readFileSync(configFile)
     var t = await toml.parse(fileContent)
-    console.log(t)
+    // console.log(t)
 }
 main();
 
