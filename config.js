@@ -7,6 +7,11 @@ var fs = require('fs')
 
 var defaultConfigFile = './eth.conf'
 
+/**
+ * 解析配置文件，把数据存放到 cfg 变量中
+ * @param file  需要解析的配置文件
+ * @returns {Promise.<*>}
+ */
 async function parseToml(file){
     configFile = file || defaultConfigFile;
     var fileContent = fs.readFileSync(configFile)
@@ -14,18 +19,19 @@ async function parseToml(file){
     // 把配置文件的信息放到全局变量中
     for(let key in config){
         global[key] = config[key]
+        cfg[key] = config[key]
     }
     return config
 }
 
+/**
+ * 存放配置文件中的信息
+ * @type {{}}
+ */
+var cfg = {}
+
 module.exports = {
     defaultConfigFile: defaultConfigFile,
+    cfg: cfg,
     parse: parseToml
 };
-
-// module.exports = {
-//     schame: 'http',
-//     ip: "192.168.2.45",
-//     port: 38545,
-//     contract_address: ["0x707a5e238ECD4B1D6ba3b636b3Ba2607b00024FA"],
-// }

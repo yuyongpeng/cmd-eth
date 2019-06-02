@@ -6,7 +6,7 @@ var program = require('commander');
 var ether = require('../ethereum')
 var toml = require('toml')
 var fs = require('fs')
-var configs = require('../config')
+var config = require('../config')
 var command = require('./command')
 
 var configFile = '';
@@ -24,8 +24,12 @@ async function main(){
     program
         .command('info')
         .description('获得以太坊的一些基本信息进行列表显示')
-        .action(function(options){
-            command.info(program.config);
+        .action(async function(options){
+            // 解析配置文件
+            await config.parse(program.config)
+            // 处理命令
+            let {lastBlockNumber} = await command.info(program.config)
+            console.log('lastBlockNumber: ' + lastBlockNumber)
         });
 
     program

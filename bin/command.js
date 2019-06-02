@@ -5,16 +5,15 @@
 var config = require('../config')
 var ether = require('../ethereum')
 
-
-async function info(configFile){
-    // console.log(config.defaultConfigFile)
-    var cfg = await config.parse(null)
-
-    ether.getEthInfo().then(data => {
-        var info = data
-        console.log(info)
-    })
+/**
+ * 命令行 info 的处理 ( 获取以太坊的一些基础信息 )
+ * @returns {Promise.<{lastBlockNumber: *}>}
+ */
+async function info(){
+    let lastBlockNumber = await ether.getEthInfo()
+    return {lastBlockNumber}
 }
+
 module.exports = {
     info: info
 }
