@@ -5,7 +5,7 @@
 var fs = require('fs')
 
 async function main(){
-    fs.copyFileSync('eth.conf', '/tmp/eth.conf')
+    fs.copyFileSync('eth.cfg', '/etc/eth.cfg')
 }
 
 main()

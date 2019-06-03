@@ -9,7 +9,6 @@ var Web3 = require('web3')
  */
 function getWeb3(){
     var web3 = new Web3(new Web3.providers.HttpProvider(global.schema+"://"+global.ip+":"+global.port), null, {});
-    // web3.
     return web3
 }
 

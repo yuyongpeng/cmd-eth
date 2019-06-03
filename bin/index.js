@@ -27,10 +27,10 @@ function myParseInt(value, dummyPrevious) {
 async function main(){
     program
         .version('0.0.1')
-        .option('-f, --config <path>', '配置文件(default: /etc/eth.cfg)','./eth.cfg');
+        .option('-f, --config <path>', '配置文件(default: /etc/eth.cfg)','/etc/eth.cfg');
 
     program.on('option:config', function(){
-        configFile = this.config || './test.toml';
+        configFile = this.config || './eth.cfg';
         console.log(`file: ${configFile}`)
     });
 
