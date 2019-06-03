@@ -1,10 +1,9 @@
 {
   "name": "cmd_eth",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "以太坊的命令行查询",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
     "eth": ".bin/index.js",
