@@ -84,13 +84,8 @@ async function main(){
 
 
     program.parse(process.argv);
-
-    configFile = program.config || './test.toml';
-    console.log(configFile);
-    var fileContent = fs.readFileSync(configFile)
-    var t = await toml.parse(fileContent)
-    // console.log(t)
 }
+
 main();
 
 

@@ -10,11 +10,13 @@ var ether = require('../ethereum')
  * @returns {Promise.<{lastBlockNumber: *}>}
  */
 async function info(){
-    let {lastBlockNumber, gasPrice, isMinning, conbase} = await ether.getEthInfo();
-    console.log('lastBlockNumber: ' + lastBlockNumber);
-    console.log('gasPrice: ' + gasPrice);
-    console.log('isMinning: ' + isMinning);
-    console.log('conbase: ' + conbase);
+    let info = await ether.getEthInfo();
+    console.log(info)
+    // let {lastBlockNumber, gasPrice, isMinning, conbase} = await ether.getEthInfo();
+    // console.log('lastBlockNumber: ' + lastBlockNumber);
+    // console.log('gasPrice: ' + gasPrice);
+    // console.log('isMinning: ' + isMinning);
+    // console.log('conbase: ' + conbase);
 }
 
 /**
