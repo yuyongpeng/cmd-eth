@@ -9,6 +9,7 @@ var Web3 = require('web3')
  */
 function getWeb3(){
     var web3 = new Web3(new Web3.providers.HttpProvider(global.schema+"://"+global.ip+":"+global.port), null, {});
+    // web3.
     return web3
 }
 
@@ -18,27 +19,32 @@ function getWeb3(){
  * @returns {Promise.<*>}
  */
 async function getEthInfo(){
-    web3 = getWeb3()
-    lastBlockNumber = await web3.eth.getBlockNumber()
-    return lastBlockNumber
+    let web3 = getWeb3();
+    let lastBlock = await web3.eth.getBlock('latest')
+    let lastBlockNumber = await web3.eth.getBlockNumber();
+    let gasPrice = await web3.eth.getGasPrice();
+    let isMinning = await web3.eth.isMining();
+    let hashrate = await web3.eth.getHashrate();
+    let accounts = await web3.eth.getAccounts();
+    // {"code":-32023,"message":"No accounts were found","data":"\"\""}
+    // var coinbase = await web3.eth.getCoinbase();
+    return {lastBlockNumber, gasPrice, isMinning, hashrate, accounts};
 }
 
-///////////////////////////////////////////
-async function test(web3) {
-    var balance = await web3.eth.getBalance('0x707a5e238ECD4B1D6ba3b636b3Ba2607b00024FA')
-    console.log(balance)
-    return balance
+async function getBlockInfo(blockHashOrBlockNumber, fetchTransactionData){
+    let web3 = getWeb3();
+    let block = await web3.eth.getBlock(blockHashOrBlockNumber, fetchTransactionData);
+    return block
 }
 
-async function getMessage(web3){
-    var blockNumber = await web3.eth.getBlockNumber();
-    var balance = await web3.eth.getBalance('0x707a5e238ECD4B1D6ba3b636b3Ba2607b00024FA')
-    console.log(blockNumber)
-    console.log(balance)
-    return balance
+async function getTransactionInfo(transactionHash){
+    let web3 = getWeb3();
+    let transaction = await web3.eth.getTransaction(transactionHash);
+    return transaction
 }
 
 module.exports = {
-    getMessage: getMessage,
-    getEthInfo: getEthInfo
+    getEthInfo: getEthInfo,
+    getBlockInfo: getBlockInfo,
+    getTransactionInfo: getTransactionInfo
 }
