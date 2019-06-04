@@ -3,7 +3,7 @@
  */
 
 var Web3 = require('web3')
-
+var config = require('./config')
 /**
  * 获得web3对象
  */
@@ -42,8 +42,26 @@ async function getTransactionInfo(transactionHash){
     return transaction
 }
 
+async function getContracrt(){
+    let web3 = getWeb3();
+    let jsonInterface = config.cfg.abi;
+    let options = {
+        defaultAccount: "0x5c12aed6613aad77ec2e84e5cedd9b6ff29a6e6a",
+        address: "0x5c12aed6613aad77ec2e84e5cedd9b6ff29a6e6a",
+        defaultGasPrice: 100000,
+        defaultGas: 100000,
+    }
+    let contractAddress = '0x5c12aed6613aad77ec2e84e5cedd9b6ff29a6e6a';
+    web3.eth.Contract(address=contractAddress, options=options);
+}
+
+async function getEvent(eventName, fromBlock, toBlock){
+    await getContracrt();
+}
+
 module.exports = {
     getEthInfo: getEthInfo,
     getBlockInfo: getBlockInfo,
-    getTransactionInfo: getTransactionInfo
+    getTransactionInfo: getTransactionInfo,
+    getEvent: getEvent,
 }

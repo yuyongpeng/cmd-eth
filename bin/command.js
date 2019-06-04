@@ -40,8 +40,21 @@ async function transaction(transactionHash){
     console.log(transaction)
 }
 
+/**
+ * 获得特定协约的event数据
+ * @param eventName
+ * @param fromBlock
+ * @param toBlock
+ * @returns {Promise.<void>}
+ */
+async function event(eventName, fromBlock, toBlock){
+    let event = await ether.getEvent(eventName, fromBlock, toBlock);
+    console.log(event)
+}
+
 module.exports = {
     info: info,
     block: block,
-    transaction: transaction
+    transaction: transaction,
+    event: event,
 }

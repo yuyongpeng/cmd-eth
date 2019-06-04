@@ -12,15 +12,20 @@ var defaultConfigFile = './eth.conf'
  * @param file  需要解析的配置文件
  * @returns {Promise.<*>}
  */
-async function parseToml(file){
-    configFile = file || defaultConfigFile;
-    var fileContent = fs.readFileSync(configFile)
-    var config = await toml.parse(fileContent)
+async function parseToml(configFile, abiFile){
+    configFile = configFile || defaultConfigFile;
+    let fileContent = fs.readFileSync(configFile);
+    let config = await toml.parse(fileContent);
     // 把配置文件的信息放到全局变量中
     for(let key in config){
         global[key] = config[key]
         cfg[key] = config[key]
     }
+
+    let abiFileContent = fs.readFileSync(abiFile);
+    let abiObj = JSON.parse(abiFileContent);
+    cfg['abi'] = abiObj;
+    // config.cfg.abi = abiObj;
     return config
 }
 
@@ -28,7 +33,7 @@ async function parseToml(file){
  * 存放配置文件中的信息
  * @type {{}}
  */
-var cfg = {}
+var cfg = {};
 
 module.exports = {
     defaultConfigFile: defaultConfigFile,

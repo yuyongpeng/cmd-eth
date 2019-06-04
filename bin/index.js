@@ -27,7 +27,8 @@ function myParseInt(value, dummyPrevious) {
 async function main(){
     program
         .version('0.0.1')
-        .option('-f, --config <path>', '配置文件(default: /etc/eth.cfg)','/etc/eth.cfg');
+        .option('-f, --config <path>', '配置文件(default: /etc/eth.cfg)','./eth.cfg')
+        .option('-a, --abi <path>', 'abi文件(default: ./abi.json)','./abi.json');
 
     program.on('option:config', function(){
         configFile = this.config || './eth.cfg';
@@ -54,7 +55,7 @@ async function main(){
         .option("-t, --transaction_data <value>", "是否返回这个区块的交易数据 (true|false) (default: false)", /^(true|false)$/i, false)
         .action(async function(blockHashOrBlockNumber, options){
             // 解析配置文件
-            await config.parse(program.config);
+            await config.parse(program.config, program.abi);
             // 处理命令
             let transaction_data = false;
             if(options.transaction_data == 'true'){
@@ -73,6 +74,20 @@ async function main(){
             await config.parse(program.config);
 
             await command.transaction(transactionHash);
+        });
+
+    // 获event的详细信息
+    program
+        .command('event <eventName> <fromBlock> <toBlock>')
+        .alias('ev')
+        .description('获得指定 event 的信息')
+        .option("-f, --from <value>", "开始的区块 (default: 0)", 0)
+        .option("-t, --to <value>", "结束的区块 (default: 50000)", 500000)
+        .action(async function(eventName, fromBlock, toBlock, options){
+            // 解析配置文件
+            let cfg = await config.parse(program.config, program.abi);
+            // 处理命令
+            await command.event(eventName, fromBlock, toBlock);
         });
 
     program
