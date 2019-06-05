@@ -2,8 +2,10 @@
  * Created by yuyongpeng on 2019/5/31.
  */
 
-var Web3 = require('web3')
-var config = require('./config')
+var Web3 = require('web3');
+var config = require('./config');
+var ethUtil = require('ethereumjs-util');
+
 /**
  * 获得web3对象
  */
@@ -58,6 +60,16 @@ async function getContracrt(){
 async function getEvent(eventName, fromBlock, toBlock){
     await getContracrt();
 }
+
+async function privateToAddress(privateKey){
+    privateKey.str
+    Buffer.from(privateKey, 'hex')
+    ethUtil.addHexPrefix('0x')
+    let address = ethUtil.privateToAddress();
+    let publicKey = ethUtil.privateToPublic();
+
+}
+
 
 module.exports = {
     getEthInfo: getEthInfo,

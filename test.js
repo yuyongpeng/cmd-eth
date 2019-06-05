@@ -15,7 +15,7 @@ function genHash({name, id_number, birth_date, major, arms, demobilized_number }
     var data = [
         name,
         id_number,
-        birth_date.toString('yyyy-MM-dd'),
+        birth_date,
         major,
         arms,
         demobilized_number,
@@ -27,7 +27,7 @@ function main(){
     console.log(__dirname)
     let person= {
         name : "俞永鹏",
-        id : '362101198210170078',
+        id_number : '362101198210170078',
         birth_date : "1982-10-17",
         major : "步兵",
         arms : "列兵",

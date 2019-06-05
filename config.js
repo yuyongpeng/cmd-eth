@@ -5,8 +5,8 @@
 var toml = require('toml')
 var fs = require('fs')
 
-var defaultConfigFile = __dirname + '/../eth.cfg';
-var defaultAbiFile = __dirname + '/../abi.json';
+var defaultConfigFile = __dirname + '/eth.cfg';
+var defaultAbiFile = __dirname + '/abi.json';
 
 /**
  * 解析配置文件，把数据存放到 cfg 变量中
