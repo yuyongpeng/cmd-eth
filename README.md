@@ -1,4 +1,5 @@
 ## 命令行说明
+```
 Usage: index [options] [command]
 
 Options:
@@ -15,4 +16,4 @@ Commands:
   privateto|pt <privateKey>                             将私钥转换为 公钥 和 address (私钥可以带 0x 前缀)
   genkey|gk                                             随机的生成 私钥 公钥 address
   *
-
+```
