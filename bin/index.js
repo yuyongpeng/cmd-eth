@@ -25,7 +25,6 @@ function myParseInt(value, dummyPrevious) {
 }
 
 async function main(){
-    console.log(process.cwd())
     program
         .version('0.0.1')
         .option('-f, --config <path>', '配置文件(default: ./eth.cfg)', __dirname + '/../eth.cfg')

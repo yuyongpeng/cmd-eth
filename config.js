@@ -5,7 +5,8 @@
 var toml = require('toml')
 var fs = require('fs')
 
-var defaultConfigFile = './eth.conf'
+var defaultConfigFile = __dirname + '/../eth.cfg';
+var defaultAbiFile = __dirname + '/../abi.json';
 
 /**
  * 解析配置文件，把数据存放到 cfg 变量中
@@ -21,7 +22,7 @@ async function parseToml(configFile, abiFile){
         global[key] = config[key]
         cfg[key] = config[key]
     }
-
+    abiFile = abiFile || defaultAbiFile;
     let abiFileContent = fs.readFileSync(abiFile);
     let abiObj = JSON.parse(abiFileContent);
     cfg['abi'] = abiObj;
