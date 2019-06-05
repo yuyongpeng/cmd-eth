@@ -102,6 +102,17 @@ async function main(){
             await command.privateToSome(privateKey);
         });
 
+    // 随机的生成 私钥 公钥 address
+    program
+        .command('genkey')
+        .alias('gk')
+        .description('随机的生成 私钥 公钥 address')
+        .action(async function(options){
+            // 解析配置文件
+            let cfg = await config.parse(program.config, program.abi);
+            // 处理命令
+            await command.generatorKey();
+        });
 
     program
         .command('*')

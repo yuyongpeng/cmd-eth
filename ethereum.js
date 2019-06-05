@@ -5,7 +5,9 @@
 var Web3 = require('web3');
 var config = require('./config');
 var ethUtil = require('ethereumjs-util');
-var utils = require('./utils')
+var utils = require('./utils');
+var keythereum = require("keythereum");
+
 /**
  * 获得web3对象
  */
@@ -79,6 +81,19 @@ function privateToAddress(privateKey){
     return {address_hex, address_checksum, publicKey_hex}
 }
 
+/**
+ * 随机生成 私钥 公钥 address 等
+ * @returns
+ */
+function generatorKey(){
+    let dk = keythereum.create();
+    let privateKey = dk.privateKey;
+    let privateKey_hex = privateKey.toString('hex');
+    let some = privateToAddress(privateKey_hex);
+    some['privateKey_hex'] = privateKey_hex;
+    return some
+}
+
 
 module.exports = {
     getEthInfo: getEthInfo,
@@ -86,4 +101,5 @@ module.exports = {
     getTransactionInfo: getTransactionInfo,
     getEvent: getEvent,
     privateToAddress: privateToAddress,
+    generatorKey: generatorKey,
 }

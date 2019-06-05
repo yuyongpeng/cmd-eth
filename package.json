@@ -1,6 +1,6 @@
 {
   "name": "cmd_eth",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "以太坊的命令行查询",
   "main": "index.js",
   "scripts": {},
@@ -14,6 +14,7 @@
     "commander": "^2.20.0",
     "crypto-tx": "^0.1.19",
     "ethereumjs-util": "^6.1.0",
+    "keythereum": "^1.0.4",
     "toml": "^3.0.0",
     "web3": "^1.0.0-beta.55",
     "yaml": "^1.6.0"

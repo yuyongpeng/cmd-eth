@@ -8,11 +8,6 @@ var ether = require('../ethereum')
 async function info(){
     let info = await ether.getEthInfo();
     console.log(info)
-    // let {lastBlockNumber, gasPrice, isMinning, conbase} = await ether.getEthInfo();
-    // console.log('lastBlockNumber: ' + lastBlockNumber);
-    // console.log('gasPrice: ' + gasPrice);
-    // console.log('isMinning: ' + isMinning);
-    // console.log('conbase: ' + conbase);
 }
 
 /**
@@ -42,12 +37,22 @@ async function transaction(transactionHash){
  * @returns {Promise.<void>}
  */
 async function privateToSome(privateKey){
-    let {address_hex, address_checksum, publicKey_hex} = ether.privateToAddress(privateKey);
-    console.log(`address_hex :  ${address_hex}`);
-    console.log(`address_checksum :  ${address_checksum}`);
-    console.log(`publicKey_hex :  ${publicKey_hex}`);
+    let obj = ether.privateToAddress(privateKey);
+    for(let key in obj){
+        console.log(`${key}: ${obj[key]}`)
+    }
 }
 
+/**
+ * 命令行 genkey 的处理函数
+ * @returns {Promise.<void>}
+ */
+async function generatorKey(){
+    let obj = ether.generatorKey();
+    for(let key in obj){
+        console.log(`${key}: ${obj[key]}`)
+    }
+}
 
 /**
  * 获得特定协约的event数据
@@ -67,4 +72,5 @@ module.exports = {
     transaction: transaction,
     event: event,
     privateToSome:privateToSome,
+    generatorKey: generatorKey,
 }
