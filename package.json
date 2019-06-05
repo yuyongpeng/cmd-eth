@@ -1,6 +1,6 @@
 {
   "name": "cmd_eth",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "以太坊的命令行查询",
   "main": "index.js",
   "scripts": {},

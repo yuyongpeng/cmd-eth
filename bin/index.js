@@ -27,8 +27,8 @@ function myParseInt(value, dummyPrevious) {
 async function main(){
     program
         .version('0.0.1')
-        .option('-f, --config <path>', '配置文件(default: /etc/eth.cfg)', __dirname + './eth.cfg')
-        .option('-a, --abi <path>', 'abi文件(default: ./abi.json)', __dirname + './abi.json');
+        .option('-f, --config <path>', '配置文件(default: /etc/eth.cfg)', __dirname + '../eth.cfg')
+        .option('-a, --abi <path>', 'abi文件(default: ./abi.json)', __dirname + '../abi.json');
 
     program.on('option:config', function(){
         configFile = this.config || './eth.cfg';
