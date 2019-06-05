@@ -90,6 +90,19 @@ async function main(){
             await command.event(eventName, fromBlock, toBlock);
         });
 
+    // 将私钥转换为 公钥 和 address
+    program
+        .command('privateto <privateKey>')
+        .alias('pt')
+        .description('将私钥转换为 公钥 和 address (私钥可以带 0x 前缀)')
+        .action(async function(privateKey, options){
+            // 解析配置文件
+            let cfg = await config.parse(program.config, program.abi);
+            // 处理命令
+            await command.privateToSome(privateKey);
+        });
+
+
     program
         .command('*')
         .action(function(env){

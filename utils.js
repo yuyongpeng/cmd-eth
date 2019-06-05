@@ -8,16 +8,17 @@
  Description:
  */
 
-function trimOx(key){
+/**
+ * 取出字符串前部的 0x 标识符
+ * @param key
+ * @returns {*|string}
+ */
+function trim0x(key){
     let re = /^0x/;
-    let news = key.replace(re, '')
-    console.log(news)
-    if(key.match(re) == true){
-        return key.substring(2);
-    }else{
-        return key
-    }
+    return key.replace(re, '')
 }
 
-var t = trimOx('0x044af3c4d907a75e9349f362b0f854c7d74a89dad457df4f9cbf3c4f9e2f7fbcf8916ac219bb70e64777930b1e85d0a550e1e61ca94fa902dee419849a9a0efe8a')
-console.log(t)
+module.exports = {
+    trim0x: trim0x,
+}
+

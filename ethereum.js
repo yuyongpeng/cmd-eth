@@ -5,7 +5,7 @@
 var Web3 = require('web3');
 var config = require('./config');
 var ethUtil = require('ethereumjs-util');
-
+var utils = require('./utils')
 /**
  * 获得web3对象
  */
@@ -61,13 +61,22 @@ async function getEvent(eventName, fromBlock, toBlock){
     await getContracrt();
 }
 
-async function privateToAddress(privateKey){
-    privateKey.str
-    Buffer.from(privateKey, 'hex')
-    ethUtil.addHexPrefix('0x')
-    let address = ethUtil.privateToAddress();
-    let publicKey = ethUtil.privateToPublic();
+/**
+ * 将私钥转换为 公钥 和 address
+ * @param privateKey   hex编码的字符串
+ * @returns {address_checksum, publicKey_hex}
+ */
+function privateToAddress(privateKey){
+    privateKeyNo0x = utils.trim0x(privateKey)
+    privateKey_bytes = Buffer.from(privateKeyNo0x, 'hex')
+    let address_bytes = ethUtil.privateToAddress(privateKey_bytes);
+    let address_hex = address_bytes.toString('hex')
+    let address_checksum = ethUtil.toChecksumAddress(address_hex);
 
+    let publicKey_bytes = ethUtil.privateToPublic(privateKey_bytes);
+    let publicKey_hex = publicKey_bytes.toString('hex');
+
+    return {address_hex, address_checksum, publicKey_hex}
 }
 
 
@@ -76,4 +85,5 @@ module.exports = {
     getBlockInfo: getBlockInfo,
     getTransactionInfo: getTransactionInfo,
     getEvent: getEvent,
+    privateToAddress: privateToAddress,
 }

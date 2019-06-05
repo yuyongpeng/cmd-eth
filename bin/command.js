@@ -1,7 +1,3 @@
-/**
- * Created by yuyongpeng on 2019/6/1.
- */
-
 var config = require('../config')
 var ether = require('../ethereum')
 
@@ -41,6 +37,19 @@ async function transaction(transactionHash){
 }
 
 /**
+ * 命令行 privateTo 的处理函数
+ * @param privateKey
+ * @returns {Promise.<void>}
+ */
+async function privateToSome(privateKey){
+    let {address_hex, address_checksum, publicKey_hex} = ether.privateToAddress(privateKey);
+    console.log(`address_hex :  ${address_hex}`);
+    console.log(`address_checksum :  ${address_checksum}`);
+    console.log(`publicKey_hex :  ${publicKey_hex}`);
+}
+
+
+/**
  * 获得特定协约的event数据
  * @param eventName
  * @param fromBlock
@@ -57,4 +66,5 @@ module.exports = {
     block: block,
     transaction: transaction,
     event: event,
+    privateToSome:privateToSome,
 }
