@@ -1,10 +1,9 @@
 {
   "name": "cmd_eth",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "以太坊的命令行查询",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "bin": {
     "eth": "bin/index.js",
     "eth_init": "bin/initconfig.js"
@@ -13,6 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "commander": "^2.20.0",
+    "crypto-tx": "^0.1.19",
     "toml": "^3.0.0",
     "web3": "^1.0.0-beta.55",
     "yaml": "^1.6.0"

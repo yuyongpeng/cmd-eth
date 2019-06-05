@@ -1,3 +1,12 @@
+#!/usr/bin/env node
+/**
+ Author:       yuyongpeng@hotmail.com
+ Github:       https://github.com/yuyongpeng/
+ Date:         2019-06-05 13:55:14
+ LastEditors:
+ LastEditTime: 2019-06-05 13:55:14
+ Description:
+ */
 
 var crypto = require('crypto-tx')
 
@@ -24,7 +33,6 @@ function genHash({name, id_number, birth_date, major, arms, demobilized_number }
 }
 
 function main(){
-    console.log(__dirname)
     let person= {
         name : "俞永鹏",
         id : '362101198210170078',
@@ -38,4 +46,7 @@ function main(){
     console.log(tk.toString('hex'))
 }
 
-main()
+
+module.exports = {
+    genHash: genHash,
+}
