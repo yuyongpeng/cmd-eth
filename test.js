@@ -1,6 +1,6 @@
 
 var crypto = require('crypto-tx')
-
+const chalk = require('chalk');
 /**
  *
  * @param name                  姓名
@@ -36,6 +36,7 @@ function main(){
     let tk = genHash(person);
     console.log(tk)
     console.log(tk.toString('hex'))
+    console.log(chalk.blue('Hello world!'));
 }
 
 main()

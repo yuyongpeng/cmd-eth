@@ -3,7 +3,9 @@
  */
 
 var Web3 = require('web3');
-var config = require('./config');
+// var config = require('./config');
+const Conf = require('conf');
+const cfg = new Conf();
 var ethUtil = require('ethereumjs-util');
 var utils = require('./utils');
 var keythereum = require("keythereum");
@@ -12,7 +14,8 @@ var keythereum = require("keythereum");
  * 获得web3对象
  */
 function getWeb3(){
-    var web3 = new Web3(new Web3.providers.HttpProvider(global.schema+"://"+global.ip+":"+global.port), null, {});
+    // var web3 = new Web3(new Web3.providers.HttpProvider(global.schema+"://"+global.ip+":"+global.port), null, {});
+    var web3 = new Web3(new Web3.providers.HttpProvider(cfg.get('schema')+"://"+cfg.get('ip')+":"+cfg.get('port')), null, {});
     return web3
 }
 

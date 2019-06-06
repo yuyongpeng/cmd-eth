@@ -3,11 +3,13 @@
  * Created by yuyongpeng on 2019/5/31.
  */
 var program = require('commander');
-var ether = require('../ethereum')
-var toml = require('toml')
-var fs = require('fs')
-var config = require('../config')
-var command = require('./command')
+var ether = require('../ethereum');
+var toml = require('toml');
+var fs = require('fs');
+var config = require('../config');
+var command = require('./command');
+const Conf = require('conf');
+const cfg = new Conf();
 
 var configFile = '';
 
@@ -27,8 +29,8 @@ function myParseInt(value, dummyPrevious) {
 async function main(){
     program
         .version('0.0.1')
-        .option('-f, --config <path>', '配置文件(default: ./eth.cfg)', __dirname + '/../eth.cfg')
-        .option('-a, --abi <path>', 'abi文件(default: ./abi.json)', __dirname + '/../abi.json');
+        .option('-f, --config <path>', '配置文件', __dirname + '/../eth.cfg')
+        .option('-a, --abi <path>', 'abi文件', __dirname + '/../abi.json');
 
     program.on('option:config', function(){
         configFile = this.config || './eth.cfg';
@@ -85,7 +87,7 @@ async function main(){
         .option("-t, --to <value>", "结束的区块 (default: 50000)", 500000)
         .action(async function(eventName, fromBlock, toBlock, options){
             // 解析配置文件
-            let cfg = await config.parse(program.config, program.abi);
+            await config.parse(program.config, program.abi);
             // 处理命令
             await command.event(eventName, fromBlock, toBlock);
         });
@@ -97,7 +99,7 @@ async function main(){
         .description('将私钥转换为 公钥 和 address (私钥可以带 0x 前缀)')
         .action(async function(privateKey, options){
             // 解析配置文件
-            let cfg = await config.parse(program.config, program.abi);
+            await config.parse(program.config, program.abi);
             // 处理命令
             await command.privateToSome(privateKey);
         });
@@ -108,8 +110,9 @@ async function main(){
         .alias('gk')
         .description('随机的生成 私钥 公钥 address')
         .action(async function(options){
+            // cfg.set('test', 'ttttt');
             // 解析配置文件
-            let cfg = await config.parse(program.config, program.abi);
+            await config.parse(program.config, program.abi);
             // 处理命令
             await command.generatorKey();
         });

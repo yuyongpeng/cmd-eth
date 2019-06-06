@@ -11,7 +11,9 @@
   "author": "yuyongpeng",
   "license": "MIT",
   "dependencies": {
+    "chalk": "^2.4.2",
     "commander": "^2.20.0",
+    "conf": "^4.1.0",
     "crypto-tx": "^0.1.19",
     "ethereumjs-util": "^6.1.0",
     "keythereum": "^1.0.4",

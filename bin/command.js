@@ -1,5 +1,7 @@
-var config = require('../config')
-var ether = require('../ethereum')
+var ether = require('../ethereum');
+const chalk = require('chalk');
+const Conf = require('conf');
+const cfg = new Conf();
 
 /**
  * 命令行 info 的处理 ( 获取以太坊的一些基础信息 )
@@ -39,7 +41,7 @@ async function transaction(transactionHash){
 async function privateToSome(privateKey){
     let obj = ether.privateToAddress(privateKey);
     for(let key in obj){
-        console.log(`${key}: ${obj[key]}`)
+        console.log(chalk.blue(key) + ' : ' + chalk.grey(obj[key]))
     }
 }
 
@@ -50,7 +52,8 @@ async function privateToSome(privateKey){
 async function generatorKey(){
     let obj = ether.generatorKey();
     for(let key in obj){
-        console.log(`${key}: ${obj[key]}`)
+        // console.log(`${key}: ${obj[key]}`)
+        console.log(chalk.blue(key) + ' : ' + chalk.grey(obj[key]))
     }
 }
 
